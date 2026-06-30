@@ -98,7 +98,7 @@ img, svg {
 }
 
 section {
-  padding: 56px 24px 48px;
+  padding: 48px 24px 40px;
   position: relative;
   /* Push section top down so it doesn't hide under fixed navbar when scrolled to */
   scroll-margin-top: 72px;
@@ -111,7 +111,7 @@ section {
 
 @media (min-width: 768px) {
   section {
-    padding: 72px 24px 64px;
+    padding: 56px 24px 48px;
   }
 }
 
@@ -849,11 +849,11 @@ h1, h2, h3, h4 {
   position: relative;
   overflow: hidden;
   z-index: 1;
-  padding: 56px 0 32px !important;
-  min-height: calc(100vh - 72px) !important;
+  padding: 56px 24px 0 !important;
+  min-height: auto !important;
   display: flex !important;
   flex-direction: column !important;
-  justify-content: center !important;
+  justify-content: flex-start !important;
 }
 
 .contact-glow {
@@ -1174,8 +1174,8 @@ footer {
 footer.contact-footer {
   background: transparent;
   border-top: 1px solid var(--border);
-  padding: 12px 24px 4px;
-  margin-top: 16px;
+  padding: 16px 24px 12px;
+  margin-top: 32px;
   position: relative;
   z-index: 2;
   width: 100%;

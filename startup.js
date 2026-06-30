@@ -104,10 +104,11 @@ document.addEventListener('DOMContentLoaded', () => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('in');
-          revealObserver.unobserve(entry.target);
+        } else {
+          entry.target.classList.remove('in');
         }
       });
-    }, { rootMargin: '-60px' });
+    }, { rootMargin: '-40px 0px -40px 0px' });
 
     revealElements.forEach(el => revealObserver.observe(el));
   }
@@ -567,6 +568,52 @@ document.addEventListener('DOMContentLoaded', () => {
       if (contactSubtext) contactSubtext.classList.remove('hidden');
       if (bookingSuccessCard) bookingSuccessCard.classList.add('hidden');
     });
+  }
+
+  // ---------- Copy Email Feature ----------
+  const copyEmailBtn = document.getElementById('copyEmailBtn');
+  if (copyEmailBtn) {
+    // Create tooltip element dynamically inside the button
+    const tooltip = document.createElement('span');
+    tooltip.className = 'copy-tooltip';
+    tooltip.textContent = 'Copied!';
+    copyEmailBtn.appendChild(tooltip);
+
+    const showTooltip = () => {
+      tooltip.classList.add('show');
+      setTimeout(() => {
+        tooltip.classList.remove('show');
+      }, 1500);
+    };
+
+    copyEmailBtn.addEventListener('click', () => {
+      const emailText = 'hello@startupbuild.tech';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(emailText)
+          .then(showTooltip)
+          .catch(err => {
+            console.error('Clipboard copy failed: ', err);
+            fallbackCopy(emailText);
+          });
+      } else {
+        fallbackCopy(emailText);
+      }
+    });
+
+    const fallbackCopy = (text) => {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed'; // prevent scrolling to bottom
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        showTooltip();
+      } catch (err) {
+        console.error('Fallback copy failed completely: ', err);
+      }
+      document.body.removeChild(textarea);
+    };
   }
 
   // Recalculate on resize (link positions change)

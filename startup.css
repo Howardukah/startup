@@ -1306,17 +1306,18 @@ footer.contact-footer .copyright {
   padding-bottom: 4px;
 }
 
-/* Inside contact footer, stack on mobile, row on desktop */
+/* Inside contact footer — default flex layout */
 footer.contact-footer .footer-inner {
   align-items: center;
   gap: 20px;
   text-align: center;
+  flex-direction: column;
 }
 
 footer.contact-footer .footer-links {
   gap: 16px;
   font-size: 12px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: center;
 }
 
